@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cloud IAM Policy Synthesizer</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Cloud IAM Policy Synthesizer</h1>
+
+        <p class="subtitle">
+            Generate least-privilege IAM policies for cloud resources
+        </p>
+
+        <div class="form-container">
+
+            <label for="service">Cloud Service</label>
+
+            <select id="service">
+                <option value="s3">Amazon S3</option>
+                <option value="ec2">Amazon EC2</option>
+            </select>
+
+
+            <label for="resource">Resource Name</label>
+
+            <input
+                type="text"
+                id="resource"
+                placeholder="Example: my-bucket"
+            >
+
+
+            <label for="permission">Permission</label>
+
+            <select id="permission">
+
+                <option value="read">Read</option>
+                <option value="write">Write</option>
+                <option value="delete">Delete</option>
+                <option value="list">List</option>
+
+            </select>
+
+
+            <button onclick="generatePolicy()">
+                Generate IAM Policy
+            </button>
+
+        </div>
+
+
+        <div class="result-container">
+
+            <h2>Generated IAM Policy</h2>
+
+            <pre id="policyOutput">
+Your generated policy will appear here...
+            </pre>
+
+            <button onclick="copyPolicy()">
+                Copy Policy
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
