@@ -6,17 +6,20 @@ async function generatePolicy() {
 
     const policyOutput = document.getElementById("policyOutput");
 
+    // Check whether resource name is entered
     if (!resource) {
         policyOutput.textContent = "Please enter a resource name.";
         return;
     }
 
+    // Show loading message
     policyOutput.textContent = "Generating policy...";
 
     try {
 
+        // Send request to deployed Render backend
         const response = await fetch(
-            "http://127.0.0.1:5000/generate-policy",
+            "https://cloud-resource-least-privilege-iam.onrender.com/generate-policy",
             {
                 method: "POST",
 
@@ -34,18 +37,20 @@ async function generatePolicy() {
 
         const data = await response.json();
 
+        // Handle backend errors
         if (!response.ok) {
             policyOutput.textContent =
                 data.error || "Failed to generate policy.";
             return;
         }
 
+        // Display generated IAM policy
         policyOutput.textContent =
             JSON.stringify(data.policy, null, 4);
 
     } catch (error) {
 
-        console.error(error);
+        console.error("Error:", error);
 
         policyOutput.textContent =
             "Unable to connect to backend.";
@@ -53,6 +58,7 @@ async function generatePolicy() {
 }
 
 
+// Copy generated policy
 function copyPolicy() {
 
     const policyOutput =
